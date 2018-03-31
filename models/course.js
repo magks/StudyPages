@@ -7,6 +7,7 @@ var CourseSchema = new Schema(
   {
     units: {type: Number, min: 0, max: 5},
     dept_name: String,
+    course_tag: String,
     course_number: String,
     title: String,
     description: String,

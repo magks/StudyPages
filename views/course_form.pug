@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='dept_name') Genre:
+      input#dept_name.form-control(type='text', placeholder='IN4MTX, COMPSCI, BIO SCI, etc.' name='dept_name' value=(undefined===course ? '' : course.name))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

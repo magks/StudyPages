@@ -7,6 +7,9 @@ var class_controller = require('../controllers/classController');
 
 /// COURSE ROUTES ///
 
+// GET catalog home page.
+router.get('/', course_controller.index); // This actually maps to /catalog/ because we import the route with /catalog prefix
+
 // GET request for creating a Course. NOTE This must come before routes that display Course (uses id).
 router.get('/course/create', course_controller.course_create_get);
 
@@ -30,11 +33,8 @@ router.get('/course/:id', course_controller.course_detail);
 
 // GET request for list of all Course items.
 router.get('/courses', course_controller.course_list);
-
 /// CLASS ROUTES ///
 
-// GET catalog home page.
-router.get('/', class_controller.index);
 
 // GET request for creating Class. NOTE This must come before route for id (i.e. display class).
 router.get('/class/create', class_controller.class_create_get);
