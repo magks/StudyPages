@@ -4,7 +4,8 @@ var router = express.Router();
 // Require controller modules.
 var course_controller = require('../controllers/courseController');
 var class_controller = require('../controllers/classController');
-
+var study_controller = require('../controllers/studyController');
+var professor_controller = require('../controllers/professorController');
 /// COURSE ROUTES ///
 
 // GET catalog home page.
@@ -33,6 +34,7 @@ router.get('/course/:id', course_controller.course_detail);
 
 // GET request for list of all Course items.
 router.get('/courses', course_controller.course_list);
+
 /// CLASS ROUTES ///
 
 
@@ -59,5 +61,58 @@ router.get('/class/:id', class_controller.class_detail);
 
 // GET request for list of all Classes.
 router.get('/classes', class_controller.class_list);
+
+/// STUDY ROUTES ///
+
+// GET request for creating Study. NOTE This must come before route for id (i.e. display study).
+router.get('/study/create', study_controller.study_create_get);
+
+// POST request for creating Study.
+router.post('/study/create', study_controller.study_create_post);
+
+// GET request to delete Study.
+router.get('/study/:id/delete', study_controller.study_delete_get);
+
+// POST request to delete Study.
+router.post('/study/:id/delete', study_controller.study_delete_post);
+
+// GET request to update Study.
+router.get('/study/:id/update', study_controller.study_update_get);
+
+// POST request to update Study.
+router.post('/study/:id/update', study_controller.study_update_post);
+
+// GET request for one Study.
+router.get('/study/:id', study_controller.study_detail);
+
+// GET request for list of all Studies.
+router.get('/studies', study_controller.study_list);
+
+/// PROFESSOR ROUTES ///
+
+// GET request for creating Professor. NOTE This must come before route for id (i.e. display professor).
+router.get('/professor/create', professor_controller.professor_create_get);
+
+// POST request for creating Professor.
+router.post('/professor/create', professor_controller.professor_create_post);
+
+// GET request to delete Professor.
+router.get('/professor/:id/delete', professor_controller.professor_delete_get);
+
+// POST request to delete Professor.
+router.post('/professor/:id/delete', professor_controller.professor_delete_post);
+
+// GET request to update Professor.
+router.get('/professor/:id/update', professor_controller.professor_update_get);
+
+// POST request to update Professor.
+router.post('/professor/:id/update', professor_controller.professor_update_post);
+
+// GET request for one Professor.
+router.get('/professor/:id', professor_controller.professor_detail);
+
+// GET request for list of all Studies.
+router.get('/professors', professor_controller.professor_list);
+
 
 module.exports = router;

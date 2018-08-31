@@ -6,9 +6,19 @@ exports.index = function(req, res) {
 };
 
 // Display list of all Classs.
-exports.class_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Class list');
+exports.class_list = function(req, res, next) {
+  Class.find({}, 'course study')
+    .populate('Study')
+    .exec(function (err, list_classes){
+      if (err) { return next(err); }
+      // Successful so render
+      res.render('class_list', {title: 'Class List',
+                                class_list: list_classes});
+    });
 };
+
+
+
 
 // Display detail page for a specific Class.
 exports.class_detail = function(req, res) {

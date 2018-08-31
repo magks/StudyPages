@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each professor in professor_list
+    li
+      a(href=professor.url) #{professor.full_name} #{professor.course_name}
+
+  else
+    li There are no professors.

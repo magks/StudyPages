@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each clxss in class_list
+    li
+      a(href=clxss.url) #{clxss.name}
+      | #{clxss.start_name} - #{clxss.end_time}
+
+  else
+    li There are no classes.

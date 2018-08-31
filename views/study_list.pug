@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each val in study_list
+    li
+      a(href=val.url) #{val.class.course} -
+      if val.status=='Finished'
+        span.text-success #{val.status}
+      else if val.status=='Current'
+        span.text-danger #{val.status}
+      else
+        span.text-warning #{val.status}
+      if val.status != 'Finished'
+        span  (Due: #{val.time_left_formatted} )
+
+  else
+    li There are no studies in this catalog.

@@ -1,5 +1,6 @@
 var Course = require('../models/course');
 var Class = require('../models/class');
+var Study = require('../models/study')
 //var Genre  = require('../models/genre');
 //var BookInstance = require('../models/bookinstance');
 
@@ -9,7 +10,7 @@ const{ sanitizeBody } = require('express-validator/filter');
 
 // Catalog index(home page)
 exports.index = function(req, res) {
- // res.send('notimplemented home page viacourse');
+ // res.send('notimplemented home page via course');
 //};
 
  async.parallel({
@@ -18,7 +19,10 @@ exports.index = function(req, res) {
        },
        class_count: function(callback) {
            Class.count(callback);
-       }
+       },
+      study_count: function(callback) {
+          Study.count(callback);
+      }
 
  }, function(err, results) {
    res.render('index', { title: 'My Courses Home', error: err, data: results });
@@ -26,8 +30,15 @@ exports.index = function(req, res) {
 };
 
 // Display list of all courses.
-exports.course_list = function(req, res) {
-  res.send('NOT IMPLEMENTED: Course list');
+exports.course_list = function(req, res, next) {
+  Course.find({}, 'dept_name course_number')
+    //.populate('prerequisite')
+    .exec(function (err, list_courses){
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('course_list', {title: 'Course List',
+                                 course_list: list_courses});
+    });
 };
 
 // Display detail page for a specific Course.
@@ -37,7 +48,7 @@ exports.course_detail = function(req, res) {
 
 //  Display Course create form on GET.
 exports.course_create_get = function(req, res, next) {
-  res.render('gendre_form', {title: 'Create Genre'})
+  res.render('course_form', {title: 'Create Course'})
 };
 
 // Handle Course create on POST.
